@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,33 +13,70 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Vyser',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 241, 47, 33),
+            brightness: Brightness.light,
+          ),
+          useMaterial3: true,
+          textTheme: TextTheme(
+              titleLarge: GoogleFonts.getFont(
+                'Outfit',
+                fontWeight: FontWeight.w500,
+                fontSize: 22.0,
+              ),
+              titleMedium: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 18.0,
+              ),
+              titleSmall: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.w500,
+                fontSize: 16.0,
+              ),
+              labelLarge: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              labelMedium: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 14.0,
+              ),
+              labelSmall: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 12.0,
+                color: Colors.grey[600],
+              ),
+              bodyLarge: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 16.0,
+              ),
+              bodyMedium: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 14.0,
+              ),
+              bodySmall: GoogleFonts.getFont(
+                'Readex Pro',
+                fontWeight: FontWeight.normal,
+                fontSize: 12.0,
+                color: Colors.grey[600],
+              )),
+        ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: MyHomePage());
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -48,7 +87,7 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  // final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -84,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context)!.home),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -105,8 +144,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             Text(
               '$_counter',
