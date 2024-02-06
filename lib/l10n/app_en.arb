@@ -1,4 +1,19 @@
 {
     "home": "Home",
-    "@home": {}
+    "@home": {},
+    "getStarted": "Get Started",
+    "singInMessage": "Let's get started by signing in",
+    "phoneNumber": "Phone Number",
+    "continueBtn": "Continue",
+    "verify": "Verify",
+    "smsSent": "SMS sent to {phoneNumber}",
+    "@smsSent": {
+        "placeholders": {
+            "phoneNumber": {
+                "type": "String"
+            }
+        }
+    },
+    "smsHint": "SMS code",
+    "resend": "Resend"
 }
