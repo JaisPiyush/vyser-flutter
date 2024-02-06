@@ -1,18 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:vyser/app.state.dart';
+import 'package:vyser/config/theme.dart';
 import 'package:vyser/firebase_options.dart';
 import 'package:vyser/page/auth/sign_in.dart';
 import 'package:vyser/page/auth/sign_in_model.dart';
 import 'package:vyser/page/home/home_model.dart';
 import 'package:vyser/page/home/home.dart';
+import 'package:vyser/page/language_selector/langauge_selector.dart';
+import 'package:vyser/shared/api_call.dart';
 import 'package:vyser/shared/custom_actions.dart';
 
 final getIt = GetIt.instance;
 void main() async {
+  // GetIt registrations
   getIt.registerSingleton<CustomActions>(CustomActions());
+  getIt.registerSingleton<APICallGroup>(
+      APICallGroup('https://60fe-192-140-153-91.ngrok-free.app'));
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -26,90 +35,55 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Vyser',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.red,
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: const Size.fromHeight(50))),
-          inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(color: Colors.grey[600]!)),
-            filled: true,
-            iconColor: Colors.red,
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: const BorderSide(color: Colors.black, width: 2)),
-          ),
-          textTheme: TextTheme(
-            titleLarge: GoogleFonts.getFont('Outfit',
-                fontWeight: FontWeight.w500,
-                fontSize: 22.0,
-                color: Colors.black),
-            titleMedium: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.normal,
-                fontSize: 18.0,
-                color: Colors.black),
-            titleSmall: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.w500,
-                fontSize: 16.0,
-                color: Colors.black),
-            labelLarge: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.normal,
-                fontSize: 16.0,
-                color: Colors.black),
-            labelMedium: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.normal,
-                fontSize: 14.0,
-                color: Colors.black),
-            labelSmall: GoogleFonts.getFont(
-              'Readex Pro',
-              fontWeight: FontWeight.normal,
-              fontSize: 12.0,
-              color: Colors.grey[600],
-            ),
-            bodyLarge: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.normal,
-                fontSize: 16.0,
-                color: Colors.black),
-            bodyMedium: GoogleFonts.getFont('Readex Pro',
-                fontWeight: FontWeight.normal,
-                fontSize: 14.0,
-                color: Colors.black),
-            bodySmall: GoogleFonts.getFont(
-              'Readex Pro',
-              fontWeight: FontWeight.normal,
-              fontSize: 12.0,
-              color: Colors.grey[600],
-            ),
-          ),
-        ),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        routes: {
-          SignInModel.routeName: (context) => const SignInPage(),
-          HomePageModel.routeName: (context) => const HomePage(),
-        },
-        home: const MyHomePage());
+    return ChangeNotifierProvider(
+      create: (context) => AppState(),
+      child: Consumer<AppState>(builder: (context, appState, child) {
+        return MaterialApp(
+            title: 'Vyser',
+            theme: themeData,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routes: {
+              SignInModel.routeName: (context) => const SignInPage(),
+              HomePageModel.routeName: (context) => const HomePage(),
+            },
+            locale: appState.locale,
+            home: const MyHomePage());
+      }),
+    );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+    final appState = Provider.of<AppState>(context, listen: false);
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      appState.setIsAuthenticated(user != null);
+    });
+    appState.setIsAuthenticated(FirebaseAuth.instance.currentUser != null);
+  }
+
+  @override
+  void dispose() {
+    FirebaseAuth.instance.authStateChanges().listen((user) {});
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const SignInPage();
+    final appState = Provider.of<AppState>(context);
+    if (appState.isAuthenticated) {
+      return const HomePage();
+    }
+    return LanguageSelectorPage();
   }
 }

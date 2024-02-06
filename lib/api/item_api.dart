@@ -1,0 +1,62 @@
+import 'package:dio/dio.dart';
+import 'package:vyser/api/base_api.dart';
+import 'package:vyser/models/index.dart';
+
+class ItemAPI extends BaseAPI {
+  ItemAPI({super.apiCallGroup}) : super(route: '/item');
+
+  Future<List<Item>> findById(String itemId) async {
+    final response = await apiCallGroup.getHandler().get(
+          apiCallGroup.getBaseUrlWithSuffix(),
+          queryParameters: {
+            'item_id': itemId,
+          },
+          options: Options(headers: await apiCallGroup.getHeaders()),
+        );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to find item');
+    }
+    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+  }
+
+  Future<List<Item>> getAllSellersItems() async {
+    final response = await apiCallGroup.getHandler().get(
+          apiCallGroup.getBaseUrlWithSuffix(),
+          options: Options(headers: await apiCallGroup.getHeaders()),
+        );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to get items');
+    }
+    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+  }
+
+  Future<List<EditableItem>> getEditableDetails(List<String> ids) async {
+    final response = await apiCallGroup.getHandler().post(
+          apiCallGroup.getBaseUrlWithSuffix(suffix: '/editable'),
+          data: {
+            'ids': ids,
+          },
+          options: Options(headers: await apiCallGroup.getHeaders()),
+        );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to get items');
+    }
+    return (response.data.items as List)
+        .map((e) => EditableItem.fromJson(e))
+        .toList();
+  }
+
+  Future<List<Item>> create(List<CreateItem> items) async {
+    final response = await apiCallGroup.getHandler().post(
+          apiCallGroup.getBaseUrlWithSuffix(suffix: '/bulk'),
+          data: {
+            'items': items.map((e) => e.toJson()).toList(),
+          },
+          options: Options(headers: await apiCallGroup.getHeaders()),
+        );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to create items');
+    }
+    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+  }
+}

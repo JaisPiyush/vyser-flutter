@@ -1,0 +1,36 @@
+{
+    "home": "घर",
+    "@home": {},
+    "getStarted": "प्रारम्भ",
+    "singInMessage": "आइए साइन इन करके शुरुआत करें",
+    "phoneNumber": "फ़ोन नंबर",
+    "continueBtn": "अगला",
+    "verify": "सत्यापित करें",
+    "smsSent": "{phoneNumber} को एसएमएस भेजा गया",
+    "@smsSent": {
+        "placeholders": {
+            "phoneNumber": {
+                "type": "String"
+            }
+        }
+    },
+    "smsHint": "एसएमएस कोड",
+    "resend": "पुन: भेजें",
+    "shop": "दुकान",
+    "chatbot": "चैटबॉट",
+    "type": "यहाँ लिखें",
+    "orders": "ऑर्डर",
+    "selectLanguage": "भाषा चुने",
+    "register": "पंजीकरण करवाना",
+    "name": "नाम",
+    "address": "पता",
+    "city": "शहर",
+    "district": "ज़िला",
+    "state": "राज्य",
+    "pincode": "पिन कोड",
+    "seller": "विक्रेता",
+    "itemIsActive": "आइटम सक्रिय है",
+    "price": "कीमत",
+    "quantity": "मात्रा",
+    "reorderLevel": "स्तर पुनः क्रमित करें"
+}

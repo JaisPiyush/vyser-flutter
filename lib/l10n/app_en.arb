@@ -15,5 +15,22 @@
         }
     },
     "smsHint": "SMS code",
-    "resend": "Resend"
+    "resend": "Resend",
+    "shop": "Shop",
+    "chatbot": "Chatbot",
+    "type": "Type",
+    "orders": "Orders",
+    "selectLanguage": "Select Language",
+    "register": "Register",
+    "name": "Name",
+    "address": "Address",
+    "city": "City",
+    "district": "District",
+    "state": "State",
+    "pincode": "Pincode",
+    "seller": "Seller",
+    "itemIsActive": "Item is active",
+    "price": "Price",
+    "quantity": "Quantity",
+    "reorderLevel": "Reorder Level"
 }
