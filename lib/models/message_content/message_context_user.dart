@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'message_context_user.g.dart';
 
 @JsonSerializable()
-class MessageContextUser {
+class MessageContextUser extends Equatable {
   MessageContextUser({
     required this.id,
     required this.isSentByUser,
@@ -14,4 +15,7 @@ class MessageContextUser {
   factory MessageContextUser.fromJson(Map<String, dynamic> json) =>
       _$MessageContextUserFromJson(json);
   Map<String, dynamic> toJson() => _$MessageContextUserToJson(this);
+
+  @override
+  List<Object?> get props => [id, isSentByUser];
 }

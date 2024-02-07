@@ -18,7 +18,7 @@ class Location {
     this.id,
   });
 
-  String? id;
+  int? id;
   String address;
   String city;
   String district;

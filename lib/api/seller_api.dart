@@ -8,7 +8,7 @@ class SellerAPI extends BaseAPI {
 
   Future<Seller> getSeller() async {
     final response = await apiCallGroup.getHandler().get(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
     if (response.statusCode != 200) {
@@ -19,7 +19,7 @@ class SellerAPI extends BaseAPI {
 
   Future<void> registerSeller(Seller seller) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           data: seller.toJson(),
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
@@ -30,7 +30,7 @@ class SellerAPI extends BaseAPI {
 
   Future<void> updateSeller(bool isStoreActive) async {
     final response = await apiCallGroup.getHandler().put(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           data: {
             "is_store_active": isStoreActive,
           },

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyser/models/message_content/message_context_payload.dart';
 import 'package:vyser/models/message_content/message_context_user.dart';
@@ -5,7 +6,7 @@ import 'package:vyser/models/message_content/message_context_user.dart';
 part 'message_context.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class MessageContext {
+class MessageContext extends Equatable {
   MessageContext({
     required this.payload,
     required this.user,
@@ -20,4 +21,7 @@ class MessageContext {
       _$MessageContextFromJson(json);
 
   Map<String, dynamic> toJson() => _$MessageContextToJson(this);
+
+  @override
+  List<Object?> get props => [payload, user, actionId];
 }

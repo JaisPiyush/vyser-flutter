@@ -11,7 +11,7 @@ class MessageAPI extends BaseAPI {
     required String sessionId,
   }) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           data: {
             "message": message.toJson(),
             'text': text,
@@ -29,7 +29,7 @@ class MessageAPI extends BaseAPI {
 
   Future<List<MessageContent>> getMessages() async {
     final response = await apiCallGroup.getHandler().get(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
     if (response.statusCode != 200) {

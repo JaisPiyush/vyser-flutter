@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:vyser/app.state.dart';
 import 'package:vyser/config/theme.dart';
 import 'package:vyser/firebase_options.dart';
-import 'package:vyser/page/auth/sign_in.dart';
-import 'package:vyser/page/auth/sign_in_model.dart';
-import 'package:vyser/page/home/home_model.dart';
-import 'package:vyser/page/home/home.dart';
-import 'package:vyser/page/language_selector/langauge_selector.dart';
+import 'package:vyser/pages/auth/sign_in.dart';
+import 'package:vyser/pages/auth/sign_in_model.dart';
+import 'package:vyser/pages/home/home_model.dart';
+import 'package:vyser/pages/home/home.dart';
+import 'package:vyser/pages/language_selector/langauge_selector.dart';
+import 'package:vyser/pages/view_items/view_items.dart';
 import 'package:vyser/shared/api_call.dart';
 import 'package:vyser/shared/custom_actions.dart';
 
@@ -66,10 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     final appState = Provider.of<AppState>(context, listen: false);
+    appState.isAuthenticated = FirebaseAuth.instance.currentUser != null;
     FirebaseAuth.instance.authStateChanges().listen((user) {
       appState.setIsAuthenticated(user != null);
     });
-    appState.setIsAuthenticated(FirebaseAuth.instance.currentUser != null);
+    // appState.setIsAuthenticated(FirebaseAuth.instance.currentUser != null);
   }
 
   @override
@@ -82,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return const HomePage();
+      return ViewItems();
     }
     return LanguageSelectorPage();
   }

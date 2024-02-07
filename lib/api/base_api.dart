@@ -6,16 +6,19 @@ final getIt = GetIt.instance;
 class BaseAPI {
   BaseAPI({
     APICallGroup? apiCallGroup,
-    String route = '',
-  }) : apiCallGroup = apiCallGroup ?? getIt.get<APICallGroup>();
+    this.route = '',
+  }) : _apiCallGroup = apiCallGroup ?? getIt.get<APICallGroup>();
 
-  APICallGroup apiCallGroup;
-  String route = '';
+  final APICallGroup _apiCallGroup;
+  final String route;
+
+  APICallGroup get apiCallGroup => _apiCallGroup;
 
   String getBaseUrlWithSuffix({String? suffix}) {
     if (suffix != null) {
       return apiCallGroup.getBaseUrlWithSuffix(suffix: '$route$suffix');
     }
-    return apiCallGroup.getBaseUrlWithSuffix(suffix: route);
+    String url = apiCallGroup.getBaseUrlWithSuffix(suffix: route);
+    return url;
   }
 }

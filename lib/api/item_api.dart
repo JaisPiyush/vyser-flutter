@@ -7,7 +7,7 @@ class ItemAPI extends BaseAPI {
 
   Future<List<Item>> findById(String itemId) async {
     final response = await apiCallGroup.getHandler().get(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           queryParameters: {
             'item_id': itemId,
           },
@@ -21,7 +21,7 @@ class ItemAPI extends BaseAPI {
 
   Future<List<Item>> getAllSellersItems() async {
     final response = await apiCallGroup.getHandler().get(
-          apiCallGroup.getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(),
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
     if (response.statusCode != 200) {
