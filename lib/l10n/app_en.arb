@@ -32,5 +32,10 @@
     "itemIsActive": "Item is active",
     "price": "Price",
     "quantity": "Quantity",
-    "reorderLevel": "Reorder Level"
+    "reorderLevel": "Reorder Level",
+    "viewItems": "View Items",
+    "itemDetails": "Item Details",
+    "addItems": "Add Items",
+    "editItems": "Edit Items",
+    "search": "Search"
 }

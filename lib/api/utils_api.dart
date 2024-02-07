@@ -8,7 +8,8 @@ class UtilsAPI extends BaseAPI {
 
   Future<StorageModel> uploadFileToStorage(XFile file) async {
     FormData formData = FormData.fromMap({
-      "file": await MultipartFile.fromFile(file.path),
+      "file": MultipartFile.fromFile(file.path,
+          filename: file.path.split('/').last),
     });
 
     final response = await apiCallGroup.getHandler().post(
@@ -29,6 +30,7 @@ class UtilsAPI extends BaseAPI {
           data: formData,
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
+    print(response.data);
     return StorageModel.fromJson(response.data);
   }
 }

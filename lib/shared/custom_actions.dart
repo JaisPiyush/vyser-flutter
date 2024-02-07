@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vyser/models/index.dart';
@@ -28,11 +29,12 @@ class CustomActions {
     }).toList();
   }
 
-  MessageContent getSendableMessage(
-      MessageType type, String payload, String? userId) {
+  MessageContent getSendableMessage(MessageType type, String payload) {
     MessageContext ctx = MessageContext(
         payload: MessageContextPayload(),
-        user: MessageContextUser(id: userId ?? '', isSentByUser: true));
+        user: MessageContextUser(
+            id: FirebaseAuth.instance.currentUser?.uid ?? '',
+            isSentByUser: true));
 
     late MessageRichContent richContent;
 
@@ -108,8 +110,11 @@ class CustomActions {
 
   void performNavigationIntent(
     BuildContext context,
-    String route,
     String actionId,
     MessageContextPayload payload,
   ) {}
+
+  String getPublicUrlFromGSSchema(String gs) {
+    return gs.replaceFirst('gs://', 'https://storage.googleapis.com/');
+  }
 }

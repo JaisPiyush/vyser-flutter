@@ -6,11 +6,11 @@ part 'storage_model.g.dart';
 class StorageModel {
   StorageModel({
     required this.url,
-    required this.gcSchemaUri,
+    required this.gsSchemaUri,
   });
 
   final String url;
-  final String gcSchemaUri;
+  final String gsSchemaUri;
 
   factory StorageModel.fromJson(Map<String, dynamic> json) =>
       _$StorageModelFromJson(json);

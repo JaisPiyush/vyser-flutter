@@ -5,7 +5,9 @@ import 'package:vyser/pages/view_items/bloc/view_items_bloc.dart';
 import 'package:vyser/pages/view_items/bloc/view_items_events.dart';
 import 'package:vyser/pages/view_items/bloc/view_items_state.dart';
 import 'package:vyser/route_args.dart';
+import 'package:vyser/widgets/item_card/item_card.dart';
 import 'package:vyser/widgets/nav_bar/nav_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewItems extends StatefulWidget {
   static const String routeName = '/viewItems';
@@ -56,10 +58,12 @@ class _ViewItemsState extends State<ViewItems> {
       viewItemsBloc.add(FetchItems());
     }
 
+    final appLocalization = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: NavBarWidget(
         context: context,
-        title: 'Items',
+        title: '',
         showLeadingIcon: true,
       ),
       body: Container(
@@ -77,7 +81,7 @@ class _ViewItemsState extends State<ViewItems> {
                     filled: theme.inputDecorationTheme.filled,
                     iconColor: theme.inputDecorationTheme.iconColor,
                     focusedBorder: theme.inputDecorationTheme.focusedBorder,
-                    hintText: 'Search',
+                    hintText: appLocalization.search,
                     prefixIcon: const Icon(Icons.search)),
               ),
             ),
@@ -97,39 +101,14 @@ class _ViewItemsState extends State<ViewItems> {
                                       crossAxisCount: 2),
                               itemBuilder: (context, index) {
                                 Item item = state.items[index];
-                                return InkWell(
+                                return ItemCard(
+                                  key: Key(item.id),
                                   onTap: () {
                                     navigateToItemDetails(item);
                                   },
-                                  child: Card(
-                                      key: Key(index.toString()),
-                                      color: Colors.white,
-                                      child: Column(
-                                        children: [
-                                          Image.network(
-                                            item.descriptor_images[0],
-                                            fit: BoxFit.contain,
-                                          ),
-                                          Expanded(
-                                            child: ListTile(
-                                              contentPadding:
-                                                  const EdgeInsets.only(
-                                                      bottom: 8, left: 8),
-                                              title: Text(
-                                                item.creator,
-                                                style:
-                                                    theme.textTheme.labelSmall,
-                                              ),
-                                              subtitle: Text(
-                                                item.creator,
-                                                style: theme
-                                                    .textTheme.labelMedium!
-                                                    .copyWith(fontSize: 12),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      )),
+                                  image: item.descriptor_images[0],
+                                  name: item.name,
+                                  creator: item.creator,
                                 );
                               });
                         } else if (state is ViewItemsFetchingFailed) {

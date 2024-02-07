@@ -11,6 +11,7 @@ import 'package:vyser/pages/auth/sign_in.dart';
 import 'package:vyser/pages/auth/sign_in_model.dart';
 import 'package:vyser/pages/home/home_model.dart';
 import 'package:vyser/pages/home/home.dart';
+import 'package:vyser/pages/item_detail/item_detail.dart';
 import 'package:vyser/pages/language_selector/langauge_selector.dart';
 import 'package:vyser/pages/view_items/view_items.dart';
 import 'package:vyser/shared/api_call.dart';
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return ViewItems();
+      return const HomePage();
     }
     return LanguageSelectorPage();
   }

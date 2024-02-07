@@ -6,17 +6,17 @@ class MessagesState extends Equatable {
   List<Object?> get props => [];
 }
 
-class FetchingMessages extends MessagesState {}
+class FetchingMessagesState extends MessagesState {}
 
-class ReFetchingMessages extends MessagesState {}
-
-class MessagesFetched extends MessagesState {
+class MessagesFetchedState extends MessagesState {
   final List<MessageContent> messages;
 
-  MessagesFetched(this.messages);
+  MessagesFetchedState(this.messages);
 
   @override
   List<Object?> get props => [messages];
 }
 
-class FetchingMessagesFailed extends MessagesState {}
+class FetchingMessagesFailedState extends MessagesState {}
+
+class SendingMessageFailed extends MessagesState {}

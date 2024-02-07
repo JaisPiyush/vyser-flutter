@@ -32,5 +32,10 @@
     "itemIsActive": "आइटम सक्रिय है",
     "price": "कीमत",
     "quantity": "मात्रा",
-    "reorderLevel": "स्तर पुनः क्रमित करें"
+    "reorderLevel": "स्तर पुनः क्रमित करें",
+    "viewItems": "आइटम देखें",
+    "itemDetails": "आइटम विवरण",
+    "addItems": "सामगंरियां जोड़ें",
+    "editItems": "आइटम संपादित करें",
+    "search": "खोज"
 }
