@@ -9,8 +9,8 @@ class MessageContextPayload {
     this.name,
   });
 
-  final String? image;
-  final String? name;
+  String? image;
+  String? name;
 
   factory MessageContextPayload.fromJson(Map<String, dynamic> json) =>
       _$MessageContextPayloadFromJson(json);

@@ -13,11 +13,11 @@ class MessageRichContent {
     this.rawUrl,
   });
 
-  final String type;
-  final List<MessageChipOption>? options;
-  final String? actionId;
-  final String? text;
-  final String? rawUrl;
+  String type;
+  List<MessageChipOption>? options;
+  String? actionId;
+  String? text;
+  String? rawUrl;
 
   factory MessageRichContent.fromJson(Map<String, dynamic> json) =>
       _$MessageRichContentFromJson(json);

@@ -12,9 +12,9 @@ class MessageContext {
     this.actionId,
   });
 
-  final MessageContextPayload payload;
-  final MessageContextUser user;
-  final String? actionId;
+  MessageContextPayload payload;
+  MessageContextUser user;
+  String? actionId;
 
   factory MessageContext.fromJson(Map<String, dynamic> json) =>
       _$MessageContextFromJson(json);

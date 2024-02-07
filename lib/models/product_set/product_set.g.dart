@@ -8,6 +8,7 @@ part of 'product_set.dart';
 
 ProductSet _$ProductSetFromJson(Map<String, dynamic> json) => ProductSet(
       id: json['id'] as String,
+      name: json['name'] as String,
       created_at: json['created_at'] as String,
       brand: json['brand'] as String,
       attributes:
@@ -40,4 +41,5 @@ Map<String, dynamic> _$ProductSetToJson(ProductSet instance) =>
       'item_group_id': instance.item_group_id,
       'product_set_id': instance.product_set_id,
       'product_id': instance.product_id,
+      'name': instance.name,
     };

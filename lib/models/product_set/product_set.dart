@@ -8,6 +8,7 @@ part 'product_set.g.dart';
 class ProductSet {
   ProductSet(
       {required this.id,
+      required this.name,
       required this.created_at,
       required this.brand,
       required this.attributes,
@@ -32,6 +33,7 @@ class ProductSet {
   final String? item_group_id;
   final String product_set_id;
   final String product_id;
+  final String name;
 
   factory ProductSet.fromJson(Map<String, dynamic> json) =>
       _$ProductSetFromJson(json);
