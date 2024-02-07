@@ -27,12 +27,14 @@ class ItemAPI extends BaseAPI {
     if (response.statusCode != 200) {
       throw Exception('Failed to get items');
     }
-    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+    final items =
+        (response.data['items'] as List).map((e) => Item.fromJson(e)).toList();
+    return items;
   }
 
   Future<List<EditableItem>> getEditableDetails(List<String> ids) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/editable'),
+          getBaseUrlWithSuffix(suffix: '/editable'),
           data: {
             'ids': ids,
           },
@@ -41,14 +43,14 @@ class ItemAPI extends BaseAPI {
     if (response.statusCode != 200) {
       throw Exception('Failed to get items');
     }
-    return (response.data.items as List)
+    return (response.data['items'] as List)
         .map((e) => EditableItem.fromJson(e))
         .toList();
   }
 
   Future<List<Item>> create(List<CreateItem> items) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/bulk'),
+          getBaseUrlWithSuffix(suffix: '/bulk'),
           data: {
             'items': items.map((e) => e.toJson()).toList(),
           },
@@ -57,6 +59,8 @@ class ItemAPI extends BaseAPI {
     if (response.statusCode != 200) {
       throw Exception('Failed to create items');
     }
-    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+    return (response.data['items'] as List)
+        .map((e) => Item.fromJson(e))
+        .toList();
   }
 }

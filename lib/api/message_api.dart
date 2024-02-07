@@ -22,7 +22,7 @@ class MessageAPI extends BaseAPI {
     if (response.statusCode != 201) {
       throw Exception('Failed to send message');
     }
-    return (response.data.messages as List)
+    return (response.data['messages'] as List)
         .map((e) => MessageContent.fromJson(e))
         .toList();
   }
@@ -35,7 +35,7 @@ class MessageAPI extends BaseAPI {
     if (response.statusCode != 200) {
       throw Exception('Failed to get messages');
     }
-    return (response.data.messages as List)
+    return (response.data['messages'] as List)
         .map((e) => MessageContent.fromJson(e))
         .toList();
   }

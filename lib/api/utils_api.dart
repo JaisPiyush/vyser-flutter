@@ -12,7 +12,7 @@ class UtilsAPI extends BaseAPI {
     });
 
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/storage'),
+          getBaseUrlWithSuffix(suffix: '/storage'),
           data: formData,
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
@@ -25,7 +25,7 @@ class UtilsAPI extends BaseAPI {
     });
 
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/storage/temp'),
+          getBaseUrlWithSuffix(suffix: '/storage/temp'),
           data: formData,
           options: Options(headers: await apiCallGroup.getHeaders()),
         );

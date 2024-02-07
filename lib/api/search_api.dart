@@ -7,27 +7,29 @@ class SearchAPI extends BaseAPI {
 
   Future<List<Item>> textSearch(String text) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/text'),
+          getBaseUrlWithSuffix(suffix: '/text'),
           data: {
             "name": text,
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to search items');
     }
-    return (response.data as List).map((e) => Item.fromJson(e)).toList();
+    return (response.data['items'] as List)
+        .map((e) => Item.fromJson(e))
+        .toList();
   }
 
   Future<VisionSearchResponse> globalVisionSearch(String image) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/vision/global'),
+          getBaseUrlWithSuffix(suffix: '/vision/global'),
           data: {
             "image": image,
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to search items');
     }
     return VisionSearchResponse.fromJson(response.data);
@@ -35,13 +37,13 @@ class SearchAPI extends BaseAPI {
 
   Future<VisionSearchResponse> catalogVisionSearch(String image) async {
     final response = await apiCallGroup.getHandler().post(
-          apiCallGroup.getBaseUrlWithSuffix(suffix: '/vision/catalog'),
+          getBaseUrlWithSuffix(suffix: '/vision/catalog'),
           data: {
             "image": image,
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to search items');
     }
     return VisionSearchResponse.fromJson(response.data);
