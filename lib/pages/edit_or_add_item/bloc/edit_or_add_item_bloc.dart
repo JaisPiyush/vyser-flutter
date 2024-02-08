@@ -5,6 +5,7 @@ import 'package:vyser/pages/edit_or_add_item/bloc/edit_or_add_item_event.dart';
 import 'package:vyser/pages/edit_or_add_item/bloc/edit_or_add_item_state.dart';
 import 'package:vyser/route_args.dart';
 import 'package:vyser/shared/api_call.dart';
+import 'package:vyser/shared/constants.dart';
 import 'package:vyser/shared/custom_actions.dart';
 
 final getIt = GetIt.instance;
@@ -19,8 +20,8 @@ class EditOrAddItemBloc extends Bloc<EditOrAddItemEvent, EditOrAddItemState> {
   final itemAPI = getIt.get<APICallGroup>().itemAPI!;
   final customActions = getIt.get<CustomActions>();
 
-  final addItemsActionId = 'addItems';
-  final editItemsActionId = 'editItems';
+  final addItemsActionId = ActionId.AddItem;
+  final editItemsActionId = ActionId.EditItem;
 
   final EditOrItemsArgument args;
   List<ProductSet> _fetchedProductSets = [];
@@ -68,7 +69,7 @@ class EditOrAddItemBloc extends Bloc<EditOrAddItemEvent, EditOrAddItemState> {
       await itemAPI.create(createableItems);
       emit(EditableItemWorkingSuccessEditOrAddItemState());
     } catch (e) {
-      emit(EditableItemWorkingFailedEditOrAddItemState(event.items));
+      emit(EditableItemWorkingFailedEditOrAddItemState());
     }
   }
 
@@ -81,7 +82,7 @@ class EditOrAddItemBloc extends Bloc<EditOrAddItemEvent, EditOrAddItemState> {
       }
       emit(EditableItemWorkingSuccessEditOrAddItemState());
     } catch (e) {
-      emit(EditableItemWorkingFailedEditOrAddItemState(event.items));
+      emit(EditableItemWorkingFailedEditOrAddItemState());
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vyser/models/index.dart';
 import 'package:vyser/route_args.dart';
+import 'package:vyser/shared/constants.dart';
 import 'package:vyser/shared/enums.dart';
 
 class CustomActions {
@@ -119,8 +120,20 @@ class CustomActions {
       payload: payload,
     );
     switch (actionId) {
-      case "viewItems":
+      case ActionId.ViewItems:
         _navigate(context, RouteNames.ViewItems, itemActionArgument);
+        break;
+      case ActionId.AddItem:
+        _navigate(context, RouteNames.ItemAction, itemActionArgument);
+        break;
+      case ActionId.EditItem:
+        _navigate(context, RouteNames.ItemAction, itemActionArgument);
+        break;
+      case ActionId.SearchItems:
+        _navigate(context, RouteNames.ItemAction, itemActionArgument);
+        break;
+      case ActionId.ChangeLangugae:
+        _navigate(context, RouteNames.LanguageSelector, itemActionArgument);
         break;
     }
   }

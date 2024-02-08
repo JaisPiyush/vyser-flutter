@@ -37,8 +37,8 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
       messages = _messages ?? [];
       sessionId = customActions.getSessionId();
       emit(MessagesFetchedState(getMessages));
-    } catch (e, stackTrace) {
-      print(stackTrace);
+    } catch (e) {
+      // print(stackTrace);
       emit(FetchingMessagesFailedState());
     }
   }

@@ -30,7 +30,7 @@ class UtilsAPI extends BaseAPI {
           data: formData,
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    print(response.data);
+    // print(response.data);
     return StorageModel.fromJson(response.data);
   }
 }

@@ -8,10 +8,9 @@ import 'package:vyser/app.state.dart';
 import 'package:vyser/config/theme.dart';
 import 'package:vyser/firebase_options.dart';
 import 'package:vyser/pages/auth/sign_in.dart';
-import 'package:vyser/pages/auth/sign_in_model.dart';
 import 'package:vyser/pages/edit_or_add_item/edit_or_add_item.dart';
-import 'package:vyser/pages/home/home_model.dart';
 import 'package:vyser/pages/home/home.dart';
+import 'package:vyser/pages/item_action/item_action.dart';
 import 'package:vyser/pages/item_detail/item_detail.dart';
 import 'package:vyser/pages/language_selector/langauge_selector.dart';
 import 'package:vyser/pages/view_items/view_items.dart';
@@ -52,6 +51,9 @@ class MyApp extends StatelessWidget {
               RouteNames.HomePage: (context) => const HomePage(),
               RouteNames.ViewItems: (context) => ViewItems(),
               RouteNames.EditOrAddItem: (context) => const EditOrAddItemPage(),
+              RouteNames.ItemDetail: (context) => ItemDetail(),
+              RouteNames.ItemAction: (context) => ItemActionPage(),
+              RouteNames.LanguageSelector: (context) => LanguageSelectorPage(),
             },
             locale: appState.locale,
             home: const MyHomePage());
@@ -89,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return const EditOrAddItemPage();
+      return const HomePage();
     }
     return LanguageSelectorPage();
   }

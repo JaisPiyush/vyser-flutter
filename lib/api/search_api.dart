@@ -13,7 +13,7 @@ class SearchAPI extends BaseAPI {
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 201) {
+    if (response.statusCode != 200) {
       throw Exception('Failed to search items');
     }
     return (response.data['items'] as List)
@@ -29,7 +29,7 @@ class SearchAPI extends BaseAPI {
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 201) {
+    if (response.statusCode != 200) {
       throw Exception('Failed to search items');
     }
     return VisionSearchResponse.fromJson(response.data);
@@ -43,7 +43,7 @@ class SearchAPI extends BaseAPI {
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 201) {
+    if (response.statusCode != 200) {
       throw Exception('Failed to search items');
     }
     return VisionSearchResponse.fromJson(response.data);

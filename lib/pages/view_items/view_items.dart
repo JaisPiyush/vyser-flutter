@@ -39,11 +39,6 @@ class _ViewItemsState extends State<ViewItems> {
     viewItemsBloc.add(SearchItem(_searchController.text));
   }
 
-  void navigateToItemDetails(Item item) {
-    // TODO: You have to add item Details page and then add this navigation
-    // Navigator.pushNamed(context, '/item_details', arguments: item);
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -53,9 +48,16 @@ class _ViewItemsState extends State<ViewItems> {
       if (args.payload != null && args.payload!.name != null) {
         _searchController.text = args.payload!.name!;
         viewItemsBloc.add(SearchItem(args.payload!.name!));
+      } else {
+        viewItemsBloc.add(FetchItems());
       }
     } else {
       viewItemsBloc.add(FetchItems());
+    }
+
+    void navigateToItemDetails(Item item) {
+      Navigator.pushNamed(context, RouteNames.ItemDetail,
+          arguments: ItemDetailArgument(item: item, itemId: item.id));
     }
 
     final appLocalization = AppLocalizations.of(context)!;

@@ -16,7 +16,9 @@ class ItemAPI extends BaseAPI {
     if (response.statusCode != 200) {
       throw Exception('Failed to find item');
     }
-    return (response.data.items as List).map((e) => Item.fromJson(e)).toList();
+    return (response.data['items'] as List)
+        .map((e) => Item.fromJson(e))
+        .toList();
   }
 
   Future<List<Item>> getAllSellersItems() async {
@@ -56,7 +58,7 @@ class ItemAPI extends BaseAPI {
           },
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to create items');
     }
     return (response.data['items'] as List)

@@ -35,4 +35,7 @@ class RouteNames {
   static const HomePage = '/home';
   static const ViewItems = '/viewItems';
   static const EditOrAddItem = '/editOrAddItem';
+  static const ItemAction = '/itemAction';
+  static const ItemDetail = '/itemDetail';
+  static const LanguageSelector = '/languageSelector';
 }

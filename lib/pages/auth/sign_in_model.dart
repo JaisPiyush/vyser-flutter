@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:vyser/pages/home/home_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vyser/route_args.dart';
 
 class SignInModel<T extends StatefulWidget> extends State<T> {
   late TextEditingController phoneNumberController;
@@ -129,7 +129,7 @@ class SignInModel<T extends StatefulWidget> extends State<T> {
     });
     if (!context.mounted) return;
     Navigator.of(context).pushReplacementNamed(
-      HomePageModel.routeName,
+      RouteNames.HomePage,
     );
   }
 }

@@ -18,6 +18,7 @@ class ViewItemsBloc extends Bloc<ViewItemsEvent, ViewItemState> {
   Future<void> _onSearchItem(
       SearchItem event, Emitter<ViewItemState> emit) async {
     emit(ViewItemInitial());
+    // print('coufl');
     try {
       final items = await searchAPI.textSearch(event.itemName);
       emit(ViewItemFetchedItems(items));
@@ -28,9 +29,11 @@ class ViewItemsBloc extends Bloc<ViewItemsEvent, ViewItemState> {
 
   Future<void> _onFetchItems(
       FetchItems event, Emitter<ViewItemState> emit) async {
+    // print('called');
     emit(ViewItemInitial());
     try {
       final items = await itemsAPI.getAllSellersItems();
+      // print(items);
       emit(ViewItemFetchedItems(items));
     } catch (e) {
       emit(ViewItemsFetchingFailed());

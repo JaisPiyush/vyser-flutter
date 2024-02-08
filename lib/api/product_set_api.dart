@@ -7,7 +7,7 @@ class ProductSetAPI extends BaseAPI {
 
   Future<List<ProductSet>> getProductSets(List<String> refs) async {
     final response = await apiCallGroup.getHandler().post(
-          getBaseUrlWithSuffix(),
+          getBaseUrlWithSuffix(suffix: '/references'),
           data: {
             "references": refs,
           },

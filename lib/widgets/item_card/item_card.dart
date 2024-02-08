@@ -22,9 +22,12 @@ class ItemCard extends StatelessWidget {
           color: Colors.white,
           child: Column(
             children: [
-              Image.network(
-                image,
-                fit: BoxFit.contain,
+              Container(
+                height: 100,
+                child: Image.network(
+                  image,
+                  fit: BoxFit.contain,
+                ),
               ),
               Expanded(
                 child: ListTile(
@@ -34,7 +37,7 @@ class ItemCard extends StatelessWidget {
                     style: theme.textTheme.labelSmall,
                   ),
                   subtitle: Text(
-                    creator,
+                    name,
                     style: theme.textTheme.labelMedium!.copyWith(fontSize: 12),
                   ),
                 ),

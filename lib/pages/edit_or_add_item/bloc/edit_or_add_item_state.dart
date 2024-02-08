@@ -26,11 +26,4 @@ class EditableItemWorkingEditOrAddItemState extends EditOrAddItemState {}
 
 class EditableItemWorkingSuccessEditOrAddItemState extends EditOrAddItemState {}
 
-class EditableItemWorkingFailedEditOrAddItemState extends EditOrAddItemState {
-  final List<EditableItem> items;
-
-  const EditableItemWorkingFailedEditOrAddItemState(this.items);
-
-  @override
-  List<Object> get props => [items];
-}
+class EditableItemWorkingFailedEditOrAddItemState extends EditOrAddItemState {}
