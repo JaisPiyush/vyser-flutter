@@ -25,7 +25,7 @@ class _HomePageState extends HomePageModel<HomePage> {
     final theme = Theme.of(context);
     final appLocalization = AppLocalizations.of(context)!;
 
-    final messageBloc = MessagesBloc();
+    // final messageBloc = MessagesBloc();
 
     return SafeArea(
       child: BlocProvider(
@@ -70,7 +70,7 @@ class _HomePageState extends HomePageModel<HomePage> {
                             Expanded(
                                 child: BlocProvider(
                               create: (_) =>
-                                  messageBloc..add(FetchMessagesEvent()),
+                                  MessagesBloc()..add(FetchMessagesEvent()),
                               child: const MessagesView(),
                             )),
                             Container(
@@ -82,6 +82,9 @@ class _HomePageState extends HomePageModel<HomePage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
+                                        final messageBloc =
+                                            BlocProvider.of<MessagesBloc>(
+                                                context);
                                         pickImageAndSendMessage(messageBloc);
                                       },
                                       icon: const Icon(Icons.camera_alt,
@@ -101,6 +104,9 @@ class _HomePageState extends HomePageModel<HomePage> {
                                   ),
                                   IconButton(
                                       onPressed: () {
+                                        final messageBloc =
+                                            BlocProvider.of<MessagesBloc>(
+                                                context);
                                         sendTextMessage(messageBloc);
                                       },
                                       icon: const Icon(Icons.send,
@@ -111,7 +117,16 @@ class _HomePageState extends HomePageModel<HomePage> {
                           ],
                         ),
                       ),
-                      Center(child: Text(appLocalization.orders)),
+                      Center(
+                          child: ListView(
+                        children: const [
+                          ListTile(
+                            title: Text('#Order12456'),
+                            trailing: Icon(Icons.lock_clock),
+                          ),
+                          Divider(),
+                        ],
+                      )),
                     ]),
             ),
           );
