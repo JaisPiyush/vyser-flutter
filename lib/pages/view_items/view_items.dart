@@ -50,10 +50,12 @@ class _ViewItemsState extends State<ViewItems> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final args =
-        ModalRoute.of(context)!.settings.arguments as ViewItemsArgument?;
-    if (args != null && args.name != null) {
-      _searchController.text = args.name!;
-      viewItemsBloc.add(SearchItem(args.name!));
+        ModalRoute.of(context)!.settings.arguments as ItemActionArgument?;
+    if (args != null) {
+      if (args.payload != null && args.payload!.name != null) {
+        _searchController.text = args.payload!.name!;
+        viewItemsBloc.add(SearchItem(args.payload!.name!));
+      }
     } else {
       viewItemsBloc.add(FetchItems());
     }

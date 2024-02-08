@@ -40,7 +40,7 @@ class _SimpleChatBubbleState extends State<SimpleChatBubble> {
       String _url = widget.content.rawUrl!;
       String url = customActions.getPublicUrlFromGSSchema(_url);
       return BubbleNormalImage(
-        id: 'id001',
+        id: DateTime.now().millisecondsSinceEpoch.toString() + url,
         image: Image.network(url),
         color: color,
         tail: true,

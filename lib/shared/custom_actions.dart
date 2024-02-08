@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vyser/models/index.dart';
+import 'package:vyser/pages/view_items/view_items.dart';
+import 'package:vyser/route_args.dart';
 import 'package:vyser/shared/enums.dart';
 
 class CustomActions {
@@ -112,7 +114,17 @@ class CustomActions {
     BuildContext context,
     String actionId,
     MessageContextPayload payload,
-  ) {}
+  ) {
+    ItemActionArgument itemActionArgument = ItemActionArgument(
+      actionId: actionId,
+      payload: payload,
+    );
+    switch (actionId) {
+      case "viewItems":
+        _navigate(context, ViewItems.routeName, itemActionArgument);
+        break;
+    }
+  }
 
   String getPublicUrlFromGSSchema(String gs) {
     return gs.replaceFirst('gs://', 'https://storage.googleapis.com/');

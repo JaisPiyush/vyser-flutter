@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
             routes: {
               SignInModel.routeName: (context) => const SignInPage(),
               HomePageModel.routeName: (context) => const HomePage(),
+              ViewItems.routeName: (context) => ViewItems(),
             },
             locale: appState.locale,
             home: const MyHomePage());
