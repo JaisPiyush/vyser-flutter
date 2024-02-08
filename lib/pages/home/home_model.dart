@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vyser/models/index.dart';
 import 'package:vyser/shared/api_call.dart';
 import 'package:vyser/shared/custom_actions.dart';
 import 'package:vyser/shared/enums.dart';
@@ -12,7 +11,6 @@ final getIt = GetIt.instance;
 
 class HomePageModel<T extends StatefulWidget> extends State<T>
     with SingleTickerProviderStateMixin {
-  static const String routeName = 'home';
   late TabController tabController;
   late TextEditingController messageTextController;
   late ImagePicker imagePicker;

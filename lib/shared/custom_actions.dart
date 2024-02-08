@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vyser/models/index.dart';
-import 'package:vyser/pages/view_items/view_items.dart';
 import 'package:vyser/route_args.dart';
 import 'package:vyser/shared/enums.dart';
 
@@ -121,7 +120,7 @@ class CustomActions {
     );
     switch (actionId) {
       case "viewItems":
-        _navigate(context, ViewItems.routeName, itemActionArgument);
+        _navigate(context, RouteNames.ViewItems, itemActionArgument);
         break;
     }
   }

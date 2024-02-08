@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vyser/app.state.dart';
+import 'package:vyser/route_args.dart';
 import 'package:vyser/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:vyser/pages/auth/sign_in_model.dart';
 
 class Language {
   final String name;
@@ -83,7 +83,7 @@ class LanguageSelectorPage extends StatelessWidget {
                         Navigator.pop(context);
                       } else {
                         Navigator.of(context).pushNamed(
-                          SignInModel.routeName,
+                          RouteNames.SignInPage,
                         );
                       }
                     },

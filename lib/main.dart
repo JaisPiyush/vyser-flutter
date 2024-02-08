@@ -9,11 +9,13 @@ import 'package:vyser/config/theme.dart';
 import 'package:vyser/firebase_options.dart';
 import 'package:vyser/pages/auth/sign_in.dart';
 import 'package:vyser/pages/auth/sign_in_model.dart';
+import 'package:vyser/pages/edit_or_add_item/edit_or_add_item.dart';
 import 'package:vyser/pages/home/home_model.dart';
 import 'package:vyser/pages/home/home.dart';
 import 'package:vyser/pages/item_detail/item_detail.dart';
 import 'package:vyser/pages/language_selector/langauge_selector.dart';
 import 'package:vyser/pages/view_items/view_items.dart';
+import 'package:vyser/route_args.dart';
 import 'package:vyser/shared/api_call.dart';
 import 'package:vyser/shared/custom_actions.dart';
 
@@ -22,7 +24,7 @@ void main() async {
   // GetIt registrations
   getIt.registerSingleton<CustomActions>(CustomActions());
   getIt.registerSingleton<APICallGroup>(
-      APICallGroup('https://03b3-192-140-153-91.ngrok-free.app'));
+      APICallGroup('https://66e6-192-140-153-91.ngrok-free.app'));
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -46,9 +48,10 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routes: {
-              SignInModel.routeName: (context) => const SignInPage(),
-              HomePageModel.routeName: (context) => const HomePage(),
-              ViewItems.routeName: (context) => ViewItems(),
+              RouteNames.SignInPage: (context) => const SignInPage(),
+              RouteNames.HomePage: (context) => const HomePage(),
+              RouteNames.ViewItems: (context) => ViewItems(),
+              RouteNames.EditOrAddItem: (context) => const EditOrAddItemPage(),
             },
             locale: appState.locale,
             home: const MyHomePage());
@@ -86,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return const HomePage();
+      return const EditOrAddItemPage();
     }
     return LanguageSelectorPage();
   }

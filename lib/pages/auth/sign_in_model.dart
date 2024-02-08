@@ -4,8 +4,6 @@ import 'package:vyser/pages/home/home_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInModel<T extends StatefulWidget> extends State<T> {
-  static const String routeName = 'signIn';
-
   late TextEditingController phoneNumberController;
   late TextEditingController smsController;
 

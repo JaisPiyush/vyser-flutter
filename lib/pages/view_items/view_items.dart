@@ -10,8 +10,6 @@ import 'package:vyser/widgets/nav_bar/nav_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewItems extends StatefulWidget {
-  static const String routeName = '/viewItems';
-
   @override
   State<ViewItems> createState() => _ViewItemsState();
 }
