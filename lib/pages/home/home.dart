@@ -24,8 +24,7 @@ class _HomePageState extends HomePageModel<HomePage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appLocalization = AppLocalizations.of(context)!;
-
-    // final messageBloc = MessagesBloc();
+    var messageBloc = MessagesBloc();
 
     return SafeArea(
       child: BlocProvider(
@@ -64,59 +63,65 @@ class _HomePageState extends HomePageModel<HomePage> {
               child: state is! SellerFetched
                   ? const Center(child: CircularProgressIndicator())
                   : TabBarView(controller: tabController, children: [
-                      Center(
-                        child: Column(
-                          children: [
-                            Expanded(
-                                child: BlocProvider(
-                              create: (_) =>
-                                  MessagesBloc()..add(FetchMessagesEvent()),
-                              child: const MessagesView(),
-                            )),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 80,
-                              color: Colors.grey[900],
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        final messageBloc =
-                                            BlocProvider.of<MessagesBloc>(
-                                                context);
-                                        pickImageAndSendMessage(messageBloc);
-                                      },
-                                      icon: const Icon(Icons.camera_alt,
-                                          color: Colors.white)),
-                                  Expanded(
-                                    child: TextField(
-                                        controller: messageTextController,
-                                        cursorColor: Colors.white,
-                                        decoration: InputDecoration(
-                                            fillColor: Colors.grey[700],
-                                            hintText: appLocalization.type,
-                                            hintStyle: theme
-                                                .textTheme.bodyMedium!
-                                                .copyWith(color: Colors.white)),
-                                        style: theme.textTheme.bodyMedium!
-                                            .copyWith(color: Colors.white)),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        final messageBloc =
-                                            BlocProvider.of<MessagesBloc>(
-                                                context);
-                                        sendTextMessage(messageBloc);
-                                      },
-                                      icon: const Icon(Icons.send,
-                                          color: Colors.green))
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      Builder(builder: (context) {
+                        if (messageBloc.isClosed) {
+                          messageBloc = MessagesBloc();
+                        }
+                        return Center(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                  child: BlocProvider(
+                                create: (_) =>
+                                    messageBloc..add(FetchMessagesEvent()),
+                                child: const MessagesView(),
+                              )),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 80,
+                                color: Colors.grey[900],
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          // final messageBloc =
+                                          //     BlocProvider.of<MessagesBloc>(
+                                          //         context);
+                                          pickImageAndSendMessage(messageBloc);
+                                        },
+                                        icon: const Icon(Icons.camera_alt,
+                                            color: Colors.white)),
+                                    Expanded(
+                                      child: TextField(
+                                          controller: messageTextController,
+                                          cursorColor: Colors.white,
+                                          decoration: InputDecoration(
+                                              fillColor: Colors.grey[700],
+                                              hintText: appLocalization.type,
+                                              hintStyle: theme
+                                                  .textTheme.bodyMedium!
+                                                  .copyWith(
+                                                      color: Colors.white)),
+                                          style: theme.textTheme.bodyMedium!
+                                              .copyWith(color: Colors.white)),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          // final messageBloc =
+                                          //     BlocProvider.of<MessagesBloc>(
+                                          //         context);
+                                          sendTextMessage(messageBloc);
+                                        },
+                                        icon: const Icon(Icons.send,
+                                            color: Colors.green))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
                       Center(
                           child: ListView(
                         children: const [

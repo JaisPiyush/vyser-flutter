@@ -23,7 +23,7 @@ void main() async {
   // GetIt registrations
   getIt.registerSingleton<CustomActions>(CustomActions());
   getIt.registerSingleton<APICallGroup>(
-      APICallGroup('https://66e6-192-140-153-91.ngrok-free.app'));
+      APICallGroup('https://c2f9-192-140-153-91.ngrok-free.app'));
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

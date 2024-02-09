@@ -22,9 +22,10 @@ class MessageAPI extends BaseAPI {
     if (response.statusCode != 201) {
       throw Exception('Failed to send message');
     }
-    return (response.data['messages']['message'] as List)
-        .map((e) => MessageContent.fromJson(e))
+    final messages = (response.data['messages'] as List)
+        .map((e) => MessageContent.fromJson(e['message']))
         .toList();
+    return messages;
   }
 
   Future<List<MessageContent>> getMessages() async {
