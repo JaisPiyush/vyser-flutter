@@ -56,10 +56,7 @@ class _EditOrAddItemPageState extends EditOrAddItemModel<EditOrAddItemPage> {
               // }
               return ItemFormAccordians(items: state.items);
             } else if (state is EditableItemWorkingSuccessEditOrAddItemState) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.popUntil(context,
-                    (route) => route.settings.name == RouteNames.HomePage);
-              });
+              return const EditableItemWorkingSuccessEditOrAddItemView();
             } else if (state is EditableItemWorkingFailedEditOrAddItemState) {
               return const Text('Failed');
             }
@@ -68,6 +65,33 @@ class _EditOrAddItemPageState extends EditOrAddItemModel<EditOrAddItemPage> {
         ),
       )),
     ));
+  }
+}
+
+class EditableItemWorkingSuccessEditOrAddItemView extends StatefulWidget {
+  const EditableItemWorkingSuccessEditOrAddItemView({super.key});
+
+  @override
+  State<EditableItemWorkingSuccessEditOrAddItemView> createState() =>
+      _EditableItemWorkingSuccessEditOrAddItemViewState();
+}
+
+class _EditableItemWorkingSuccessEditOrAddItemViewState
+    extends State<EditableItemWorkingSuccessEditOrAddItemView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Navigator.popUntil(
+      //     context, (route) => route.settings.name == RouteNames.HomePage);
+      Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.HomePage,
+          (route) => route.settings.name == RouteNames.HomePage);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircularProgressIndicator();
   }
 }
 

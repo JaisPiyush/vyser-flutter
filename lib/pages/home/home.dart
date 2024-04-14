@@ -38,24 +38,30 @@ class _HomePageState extends HomePageModel<HomePage> {
                     context: context,
                     title: appLocalization.shop,
                     showLeadingIcon: false,
-                    actions: [
-                      Switch(
-                          value: state.seller.is_store_active,
-                          activeTrackColor: Colors.green,
-                          onChanged: (active) {
-                            // TODO: (home) - Implement store activation
-                          })
-                    ],
+                    // actions: [
+                    //   Switch(
+                    //       value: state.seller.is_store_active,
+                    //       activeTrackColor: Colors.green,
+                    //       onChanged: (active) {
+                    //         // TODO: (home) - Implement store activation
+                    //       })
+                    // ],
                     bottom: TabBar(controller: tabController, tabs: [
-                      Text(
-                        appLocalization.chatbot,
-                        style: theme.textTheme.labelLarge!
-                            .copyWith(color: theme.colorScheme.background),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          appLocalization.chatbot,
+                          style: theme.textTheme.labelLarge!
+                              .copyWith(color: theme.colorScheme.background),
+                        ),
                       ),
-                      Text(
-                        appLocalization.orders,
-                        style: theme.textTheme.labelLarge!
-                            .copyWith(color: theme.colorScheme.background),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          appLocalization.orders,
+                          style: theme.textTheme.labelLarge!
+                              .copyWith(color: theme.colorScheme.background),
+                        ),
                       ),
                     ]),
                   ),
