@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:vyser/api/festo_api.dart';
 import 'package:vyser/app.state.dart';
 import 'package:vyser/config/theme.dart';
 import 'package:vyser/firebase_options.dart';
@@ -17,19 +21,37 @@ import 'package:vyser/pages/view_items/view_items.dart';
 import 'package:vyser/route_args.dart';
 import 'package:vyser/shared/api_call.dart';
 import 'package:vyser/shared/custom_actions.dart';
+import 'package:vyser/secrets.dart' as secrets;
+
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:vyser/views/sales_billing/sales_billing_view.dart';
 
 final getIt = GetIt.instance;
 void main() async {
   // GetIt registrations
-  getIt.registerSingleton<CustomActions>(CustomActions());
-  getIt.registerSingleton<APICallGroup>(
-      APICallGroup('https://9965-122-161-77-184.ngrok-free.app'));
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  await remoteConfig.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: const Duration(minutes: 1),
+    minimumFetchInterval: const Duration(minutes: 30),
+  ));
+  await remoteConfig.fetchAndActivate();
+  // await remoteConfig.ensureInitialized();
+  final BASE_FESTO_API_URL = remoteConfig.getString('BASE_FESTO_API_URL');
+  final BASE_VYSER_API_URL = remoteConfig.getString('BASE_VYSER_API_URL');
+  getIt.registerSingleton<CustomActions>(CustomActions());
+  getIt.registerSingleton<APICallGroup>(APICallGroup(BASE_VYSER_API_URL));
+
+  runApp(MultiRepositoryProvider(providers: [
+    RepositoryProvider(
+        create: (context) => ApiClient(BASE_FESTO_API_URL, headers: {
+              HttpHeaders.authorizationHeader: secrets.SELLER_AUTH_TOKEN
+            }))
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -54,6 +76,7 @@ class MyApp extends StatelessWidget {
               RouteNames.ItemDetail: (context) => ItemDetail(),
               RouteNames.ItemAction: (context) => ItemActionPage(),
               RouteNames.LanguageSelector: (context) => LanguageSelectorPage(),
+              RouteNames.SaleVoucher: (context) => const SalesBillingView()
             },
             locale: appState.locale,
             home: const MyHomePage());
@@ -91,7 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return const HomePage();
+      return const SalesBillingView(
+        imageUrl:
+            'https://storage.googleapis.com/vyser-temporary-image-bucket/1.jpeg',
+      );
     }
     return LanguageSelectorPage();
   }

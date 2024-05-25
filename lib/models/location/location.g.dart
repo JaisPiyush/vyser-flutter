@@ -17,7 +17,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       descriptor_code: json['descriptor_code'] as String,
       descriptor_short_desc: json['descriptor_short_desc'] as String,
       descriptor_long_desc: json['descriptor_long_desc'] as String,
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{

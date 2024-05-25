@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData themeData = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.red,
+  scaffoldBackgroundColor: const Color(0xfff2f2f2),
+  colorScheme: ColorScheme(
+    primary: Colors.black,
+    secondary: Colors.grey[600]!,
+    surface: Colors.white,
+    background: Colors.white,
+    error: Colors.red,
+    onPrimary: Colors.white,
+    onSecondary: Colors.white,
+    onSurface: Colors.black,
+    onBackground: Colors.black,
+    onError: Colors.white,
     brightness: Brightness.light,
   ),
   useMaterial3: true,

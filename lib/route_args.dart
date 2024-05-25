@@ -38,4 +38,5 @@ class RouteNames {
   static const ItemAction = '/itemAction';
   static const ItemDetail = '/itemDetail';
   static const LanguageSelector = '/languageSelector';
+  static const SaleVoucher = '/salesBilling';
 }
