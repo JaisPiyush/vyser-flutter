@@ -33,7 +33,7 @@ class ImagePickerWidget extends StatelessWidget {
             title: Center(
                 child: Text(
               title,
-              style: theme.textTheme.displayMedium!
+              style: theme.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.normal),
             )),
             subtitle: subtitle != null

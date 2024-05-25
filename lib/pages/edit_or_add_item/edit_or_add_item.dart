@@ -145,6 +145,8 @@ class _ItemFormAccordiansState extends State<ItemFormAccordians> {
         EditableItem item = saveAbleEditableItems[i];
         sections.add(AccordionSection(
             isOpen: i == currentFocusIndex,
+            headerBackgroundColor: theme.colorScheme.background,
+            contentBackgroundColor: theme.colorScheme.background,
             header: Text(
               item.name!,
               style: theme.textTheme.labelMedium,

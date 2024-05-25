@@ -59,6 +59,7 @@ class ItemActionPage extends StatelessWidget {
       appBar: NavBarWidget(
         context: context,
         title: getHeaderName(),
+        showLeadingIcon: true,
       ),
       body: Center(
         child: BlocProvider(

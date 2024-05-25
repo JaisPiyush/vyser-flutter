@@ -114,10 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     if (appState.isAuthenticated) {
-      return const SalesBillingView(
-        imageUrl:
-            'https://storage.googleapis.com/vyser-temporary-image-bucket/1.jpeg',
-      );
+      return const HomePage();
     }
     return LanguageSelectorPage();
   }

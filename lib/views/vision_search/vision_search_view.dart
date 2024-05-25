@@ -22,8 +22,10 @@ class VisionSearchView<S extends BaseVisionSearchState>
       bloc: cubit,
       builder: (context, state) {
         if (state is BaseVisionSearchErrorMixin) {
-          final snack = SnackBar(content: Text(state.message));
-          ScaffoldMessenger.of(context).showSnackBar(snack);
+          WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+            final snack = SnackBar(content: Text(state.message));
+            ScaffoldMessenger.of(context).showSnackBar(snack);
+          });
           return Center(
             child: Text(
               state.message,

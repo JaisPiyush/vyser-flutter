@@ -49,8 +49,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '92720067679',
     projectId: 'ondc-seller-app-prototype',
     authDomain: 'ondc-seller-app-prototype.firebaseapp.com',
-    databaseURL: 'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ondc-seller-app-prototype.appspot.com',
+    databaseURL:
+        'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'vyser-temporary-image-bucket',
     measurementId: 'G-0Q2HRGX59J',
   );
 
@@ -59,8 +60,9 @@ class DefaultFirebaseOptions {
     appId: '1:92720067679:android:a996f89162e70d537417ea',
     messagingSenderId: '92720067679',
     projectId: 'ondc-seller-app-prototype',
-    databaseURL: 'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ondc-seller-app-prototype.appspot.com',
+    databaseURL:
+        'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'vyser-temporary-image-bucket',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -68,8 +70,9 @@ class DefaultFirebaseOptions {
     appId: '1:92720067679:ios:52d4478b474b8c2c7417ea',
     messagingSenderId: '92720067679',
     projectId: 'ondc-seller-app-prototype',
-    databaseURL: 'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ondc-seller-app-prototype.appspot.com',
+    databaseURL:
+        'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'vyser-temporary-image-bucket',
     iosBundleId: 'com.example.vyser',
   );
 
@@ -78,8 +81,9 @@ class DefaultFirebaseOptions {
     appId: '1:92720067679:ios:5075ee11ca3f89a57417ea',
     messagingSenderId: '92720067679',
     projectId: 'ondc-seller-app-prototype',
-    databaseURL: 'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ondc-seller-app-prototype.appspot.com',
+    databaseURL:
+        'https://ondc-seller-app-prototype-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'vyser-temporary-image-bucket',
     iosBundleId: 'com.example.vyser.RunnerTests',
   );
 }

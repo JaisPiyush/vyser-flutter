@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vyser/route_args.dart';
 import 'package:vyser/views/messages/bloc/messages_events.dart';
 import 'package:vyser/views/messages/bloc/messags_bloc.dart';
 import 'package:vyser/views/messages/message_view.dart';
@@ -9,6 +10,7 @@ import 'package:vyser/pages/home/bloc/home_state.dart';
 import 'package:vyser/pages/home/home_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vyser/widgets/order_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,27 +34,31 @@ class _HomePageState extends HomePageModel<HomePage> {
         child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
           return Scaffold(
             key: _scaffoldKey,
+            bottomNavigationBar: BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.receipt), label: 'Sale Voucher')
+              ],
+              onTap: (index) {
+                if (index == 1) {
+                  Navigator.of(context).pushNamed(RouteNames.SaleVoucher);
+                }
+              },
+            ),
             appBar: state is! SellerFetched
                 ? null
                 : NavBarWidget(
                     context: context,
                     title: appLocalization.shop,
                     showLeadingIcon: false,
-                    // actions: [
-                    //   Switch(
-                    //       value: state.seller.is_store_active,
-                    //       activeTrackColor: Colors.green,
-                    //       onChanged: (active) {
-                    //         // TODO: (home) - Implement store activation
-                    //       })
-                    // ],
                     bottom: TabBar(controller: tabController, tabs: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 5),
                         child: Text(
                           appLocalization.chatbot,
                           style: theme.textTheme.labelLarge!
-                              .copyWith(color: theme.colorScheme.background),
+                              .copyWith(color: theme.colorScheme.primary),
                         ),
                       ),
                       Padding(
@@ -60,7 +66,7 @@ class _HomePageState extends HomePageModel<HomePage> {
                         child: Text(
                           appLocalization.orders,
                           style: theme.textTheme.labelLarge!
-                              .copyWith(color: theme.colorScheme.background),
+                              .copyWith(color: theme.colorScheme.primary),
                         ),
                       ),
                     ]),
@@ -131,11 +137,7 @@ class _HomePageState extends HomePageModel<HomePage> {
                       Center(
                           child: ListView(
                         children: const [
-                          ListTile(
-                            title: Text('#Order12456'),
-                            trailing: Icon(Icons.lock_clock),
-                          ),
-                          Divider(),
+                          OrderTab(),
                         ],
                       )),
                     ]),
