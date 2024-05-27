@@ -11,6 +11,7 @@ class SellerAPI extends BaseAPI {
           getBaseUrlWithSuffix(),
           options: Options(headers: await apiCallGroup.getHeaders()),
         );
+
     if (response.statusCode != 200) {
       throw Exception('Failed to get seller');
     }
